@@ -5,23 +5,29 @@ type Token struct {
 	Type    TokenType
 	Literal string
 }
- const {
+
+const (
 	ILLEGAL = "ILLEGAL"
-	EOF = "EOF"
+	EOF     = "EOF"
 
 	//Identifiers/Literals
 	IDENTIFIER = "IDENTIFIER"
-	INTEGER = "INTEGER"
+	INTEGER    = "INTEGER"
 
 	//Operators
 	ASSIGN = "="
-	PLUS = "+"
+	PLUS   = "+"
 
 	//Delimiters
-	COMMA = ","
+	COMMA     = ","
 	SEMICOLON = ";"
 
 	PAREN_RIGHT = ")"
-	PAREN_LEFT = "("
-	
- }
+	PAREN_LEFT  = "("
+	CURLY_RIGHT = "}"
+	CURLY_LEFT  = "{"
+
+	// Keywords
+	FUNCTION = "FUNCTION"
+	LET      = "LET"
+)
