@@ -41,7 +41,7 @@ func TestNextToken(t *testing.T) {
 		{token.PLUS, "+"},
 		{token.IDENTIFIER, "y"},
 		{token.SEMICOLON, ";"},
-		{token.CURLY_LEFT, "}"},
+		{token.CURLY_RIGHT, "}"},
 		{token.SEMICOLON, ";"},
 		{token.LET, "let"},
 		{token.IDENTIFIER, "result"},
