@@ -1,6 +1,7 @@
 package lexer
 
 import (
+	"fmt"
 	"mama-lolo/GoCompiler/token"
 	"testing"
 )
@@ -12,7 +13,15 @@ func TestNextToken(t *testing.T) {
 			let add = fn(x, y) {
 			x + y;
 			};
-			let result = add(five, ten);`
+			let result = add(five, ten);
+			!-/*5;
+			5 < 10 > 5;
+			if (5 < 10) {
+				return true;
+			} else {
+				return false;
+			}
+			== != <= >=`
 	tests := []struct {
 		expectedType    token.TokenType
 		expectedLiteral string
@@ -53,12 +62,46 @@ func TestNextToken(t *testing.T) {
 		{token.IDENTIFIER, "ten"},
 		{token.PAREN_RIGHT, ")"},
 		{token.SEMICOLON, ";"},
+		{token.BANG, "!"},
+		{token.MINUS, "-"},
+		{token.SLASH, "/"},
+		{token.ASTERISK, "*"},
+		{token.INTEGER, "5"},
+		{token.SEMICOLON, ";"},
+		{token.INTEGER, "5"},
+		{token.LT, "<"},
+		{token.INTEGER, "10"},
+		{token.GT, ">"},
+		{token.INTEGER, "5"},
+		{token.SEMICOLON, ";"},
+		{token.IF, "if"},
+		{token.PAREN_LEFT, "("},
+		{token.INTEGER, "5"},
+		{token.LT, "<"},
+		{token.INTEGER, "10"},
+		{token.PAREN_RIGHT, ")"},
+		{token.CURLY_LEFT, "{"},
+		{token.RETURN, "return"},
+		{token.TRUE, "true"},
+		{token.SEMICOLON, ";"},
+		{token.CURLY_RIGHT, "}"},
+		{token.ELSE, "else"},
+		{token.CURLY_LEFT, "{"},
+		{token.RETURN, "return"},
+		{token.FALSE, "false"},
+		{token.SEMICOLON, ";"},
+		{token.CURLY_RIGHT, "}"},
+		{token.EQUAL, "=="},
+		{token.NOT_EQUAL, "!="},
+		{token.LEQ, "<="},
+		{token.GEQ, ">="},
 		{token.EOF, ""},
 	}
 
 	l := New(input)
 	for i, testCase := range tests {
 		tok := l.NextToken()
+		fmt.Printf("Current Token: %q\n", tok)
 		if tok.Type != testCase.expectedType {
 			t.Fatalf("tests[%d] - wrong token type. Expected : %q, but got:%q",
 				i, testCase.expectedType, tok.Type)
